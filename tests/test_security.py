@@ -1,0 +1,42 @@
+from http import HTTPStatus
+
+from jwt import decode
+
+from fast_zero.security import ALGORITHM, SECRET_KEY, create_access_token
+
+
+def test_jwt():
+    data = {'sub': 'test@test.com'}
+    token = create_access_token(data)
+
+    result = decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+    assert result['sub'] == data['sub']
+    assert result['exp']
+
+
+def test_jwt_invalid_token(client):
+    response = client.delete(
+        '/users/2', headers={'Authorization': 'Bearer token-invalido'}
+    )
+
+    assert response.status_code == HTTPStatus.UNAUTHORIZED
+    assert response.json() == {'detail': 'Could not validade credentials'}
+    assert response.headers['WWW-Authenticate']
+    assert response.headers['WWW-Authenticate'] == 'Bearer'
+
+
+# TODO: fazer o teste para caso o user não esteja registrado
+# def test_jwt_token_if_correct_token_and_user_not_exists(client, user, token):
+#     response = client.put(
+#         '/users/2',
+#         headers={'Authorization': f'Bearer {token}'},
+#         json={
+#             'password': '1236',
+#             'username': 'amimmeusxman',
+#             'email': 'papagaiada@mail.com',
+#             'id': 2,
+#         },
+#     )
+
+#     assert response.status_code == HTTPStatus.UNAUTHORIZED
+#     assert response.json() == {'detail': 'Could not validade credentials'}
