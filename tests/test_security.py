@@ -22,7 +22,7 @@ def test_jwt_invalid_token(client):
     )
 
     assert response.status_code == HTTPStatus.UNAUTHORIZED
-    assert response.json() == {'detail': 'Could not validade credentials'}
+    assert response.json() == {'detail': 'Could not validate credentials'}
     assert response.headers['WWW-Authenticate']
     assert response.headers['WWW-Authenticate'] == 'Bearer'
 
@@ -41,4 +41,4 @@ def test_jwt_invalid_token(client):
 #     )
 
 #     assert response.status_code == HTTPStatus.UNAUTHORIZED
-#     assert response.json() == {'detail': 'Could not validade credentials'}
+#     assert response.json() == {'detail': 'Could not validate credentials'}
