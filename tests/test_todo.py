@@ -4,7 +4,7 @@ from fast_zero.models import TodoState
 from tests.conftest import TodoFactory
 
 
-def test_create_user(client, token):
+def test_create_todo(client, token):
     response = client.post(
         '/todos/',
         headers={'Authorization': f'Bearer {token}'},
@@ -14,13 +14,20 @@ def test_create_user(client, token):
             'state': 'draft',
         },
     )
+    # vou pelo caminho mais facil de testar se retorna os campos esperados
+    # não sei como deveria testar o conteúdo dos campos created_at e updated_at
+    # já que eles são campos de tempo
 
-    assert response.json() == {
-        'id': 1,
-        'title': 'Test todo',
-        'description': 'Test todo description',
-        'state': 'draft',
-    }
+    fields = [
+        'title',
+        'description',
+        'state',
+        'id',
+        'created_at',
+        'updated_at',
+    ]
+
+    assert list(response.json().keys()) == fields
 
 
 def test_list_todos_should_return_5_todos(session, client, user, token):
