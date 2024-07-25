@@ -1,7 +1,7 @@
 """add created_at and updated_at to todos table
 
 Revision ID: b1777902614b
-Revises: 406eeb9d6431
+Revises: d8da8528f479
 Create Date: 2024-07-19 09:49:07.050600
 
 """
@@ -13,7 +13,7 @@ import sqlalchemy as sa
 
 # revision identifiers, used by Alembic.
 revision: str = 'b1777902614b'
-down_revision: Union[str, None] = '406eeb9d6431'
+down_revision: Union[str, None] = 'd8da8528f479'
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
 

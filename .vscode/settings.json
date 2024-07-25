@@ -5,6 +5,15 @@
             "driver": "SQLite",
             "name": "fast zero",
             "database": "${workspaceFolder:fast_zero}/database.db"
+        },
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "app_database",
+            "username": "app_user",
+            "database": "app_db"
         }
     ],
     "sqltools.useNodeRuntime": true
